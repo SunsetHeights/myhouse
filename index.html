@@ -840,12 +840,12 @@
   }
   .rigging-photo:hover { border-color: var(--primary); }
   .rigging-scroll .rigging-photo {
-    min-width: 220px;
-    height: 280px;
+    min-width: 286px;
+    height: 364px;
     flex-shrink: 0;
   }
-  .rigging-scroll.sq .rigging-photo { min-width: 240px; height: 240px; }
-  #gif-b-track .rigging-photo { min-width: 240px; height: 400px; }
+  .rigging-scroll.sq .rigging-photo { min-width: 312px; height: 312px; }
+  #gif-b-track .rigging-photo { min-width: 312px; height: 520px; }
   .rigging-scroll:not(.sq) .rigging-photo img,
   .rigging-scroll:not(.sq) .rigging-photo video { object-position: top; }
   .rigging-photo .rigging-photo-cap {
@@ -969,9 +969,9 @@
 
     .nav-tag { font-size: 12px; padding: 6px 12px; }
     .rigging-bigbox { margin: 14px 10px 16px; padding: 12px 10px 16px; }
-    .rigging-scroll .rigging-photo { min-width: 170px; height: 216px; }
-    .rigging-scroll.sq .rigging-photo { min-width: 190px; height: 190px; }
-    #gif-b-track .rigging-photo { min-width: 190px; height: 316px; }
+    .rigging-scroll .rigging-photo { min-width: 221px; height: 281px; }
+    .rigging-scroll.sq .rigging-photo { min-width: 247px; height: 247px; }
+    #gif-b-track .rigging-photo { min-width: 247px; height: 411px; }
 
     /* Section D/E price grids drop to 1 column on mobile. Two columns can't fit
        a Korean label + price badge at phone widths without either clipping the
@@ -1384,6 +1384,10 @@ function attachDrag(track) {
 }
 
 function positionPreviewAt(triggerEl) {
+  // 부모 페이지(iframe 바깥)가 스크롤되는 자동 높이 iframe 안에서는
+  // 현재 실제로 화면에 보이는 범위를 알 방법이 없어 완전한 정중앙 정렬이 불가능하다.
+  // 대신 방금 클릭한 요소는 클릭 시점에 화면에 보이고 있었다는 점을 이용해,
+  // 같은 위치에 뜨도록 앵커링해서 스크롤 없이 바로 보이게 한다.
   const top = document.getElementById('preview-top');
   if (!top || !triggerEl) return;
   const rect = triggerEl.getBoundingClientRect();
@@ -1422,12 +1426,12 @@ function hidePreview() {
   const top = document.getElementById('preview-top');
   if (!modal) return;
   modal.classList.remove('open');
-  document.body.style.overflow = '';
   if (top) {
     top.style.top = '';
     top.style.bottom = '';
     top.style.transform = '';
   }
+  document.body.style.overflow = '';
 }
 
 document.addEventListener('keydown', e => { if (e.key === 'Escape') hidePreview(); });
