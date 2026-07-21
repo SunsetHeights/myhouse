@@ -1548,7 +1548,7 @@ function renderSheetData(rows) {
     // ── 협업 작가 렌더 ──
     if (collabs.length) {
       document.getElementById('collab-grid').innerHTML = collabs.map(c => {
-        const imgSrc = c.imgUrl ? toThumbUrl(c.imgUrl) : '';
+        const imgSrc = c.imgUrl ? toImgUrl(c.imgUrl) : '';
         const desc = esc(c.desc).replace(/\n/g, '<br>');
         return `
         <div class="collab-card">
